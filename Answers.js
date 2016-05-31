@@ -55,7 +55,7 @@ module.exports = {
   },
 
   logStartCheckout: function (totalPrice:number, count:number, currency:string, customAttributes) {
-    SMXAnswers.logStartCheckout(getAsStringOrNull(totalPrice), getAsStringOrNull(count), currency, customAttributes);
+    SMXAnswers.logStartCheckout(getAsStringOrNull(totalPrice), currency, getAsStringOrNull(count), customAttributes);
   }
 };
 

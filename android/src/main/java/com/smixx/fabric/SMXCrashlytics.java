@@ -85,14 +85,19 @@ public class SMXCrashlytics extends ReactContextBaseJavaModule {
     @ReactMethod
     public void recordCustomExceptionName(String name, String reason, ReadableArray frameArray) {
         StackTraceElement[] stackTrace = new StackTraceElement[frameArray.size()];
+        StackTraceElement[] stackTraceEmpty = new StackTraceElement[0];
         for (int i = 0; i < frameArray.size(); i++) {
             ReadableMap map = frameArray.getMap(i);
             String functionName = map.hasKey("functionName") ? map.getString("functionName") : "Unknown Function";
             StackTraceElement stack = new StackTraceElement("", functionName, map.getString("fileName"), map.getInt("lineNumber"));
             stackTrace[i] = stack;
         }
-        Exception e = new Exception();
-        e.setStackTrace(stackTrace);
+
+        Exception from = new Exception(reason);
+        from.setStackTrace(stackTrace);
+
+        Exception e = new Exception(name, from);
+        e.setStackTrace(stackTraceEmpty);
         Crashlytics.logException(e);
     }
 
