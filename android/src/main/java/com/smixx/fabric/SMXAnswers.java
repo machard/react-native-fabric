@@ -12,7 +12,6 @@ import com.crashlytics.android.answers.InviteEvent;
 import com.crashlytics.android.answers.LevelEndEvent;
 import com.crashlytics.android.answers.LevelStartEvent;
 import com.crashlytics.android.answers.LoginEvent;
-import com.crashlytics.android.answers.PredefinedEvent;
 import com.crashlytics.android.answers.PurchaseEvent;
 import com.crashlytics.android.answers.RatingEvent;
 import com.crashlytics.android.answers.SearchEvent;
@@ -189,7 +188,7 @@ public class SMXAnswers extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void logStartCheckout(String totalPrice, String count, String currency, ReadableMap customAttributes) {
+    public void logStartCheckout(String totalPrice, String currency, String count, ReadableMap customAttributes) {
         StartCheckoutEvent event = new StartCheckoutEvent();
         if (currency != null)
             event.putCurrency(Currency.getInstance(currency));
